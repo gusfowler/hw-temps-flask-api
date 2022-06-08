@@ -10,7 +10,9 @@ def hello_world():
 
     for line in stdOut.split("\n"):
         if line != '':
+            print(line)
             output.append(line)
+
 
     print(output)
     return str(output)
