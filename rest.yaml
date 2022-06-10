@@ -1,5 +1,7 @@
 # Inclue 'rest: !include rest.yaml' in your configuration.yaml to activate this file
-# Compare what is in here vs the sample json outputs to get an idea of what to plug in
+# Compare what is in here vs the sample json outputs to get an idea of what to plug into the value_template's below
+# value_json is what homeassistant gets from the api
+# scan_interval is the update interval / refresh rate
 
 - resource: http://**YOUR IP HERE**:5000/sensors
   scan_interval: 5
