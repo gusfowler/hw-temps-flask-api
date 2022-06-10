@@ -1,5 +1,6 @@
 #!/bin/bash
 
-export FLASK_APP=api.py
+source /root/hw-temps-flask-api/.env/bin/activate
+export FLASK_APP=/root/hw-temps-flask-api/api.py
 
-flask run -h 0.0.0.0 -p 80
+/root/hw-temps-flask-api/.env/bin/flask run -h 0.0.0.0 -p 5000
