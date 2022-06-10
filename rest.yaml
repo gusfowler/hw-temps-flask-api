@@ -1,0 +1,40 @@
+# Inclue 'rest: !include rest.yaml' in your configuration.yaml to activate this file
+# Compare what is in here vs the sample json outputs to get an idea of what to plug in
+
+- resource: http://**YOUR IP HERE**:5000/sensors
+  scan_interval: 5
+  sensor:
+    - name: "CPU Temp"
+      unit_of_measurement: "°C"
+      # demo of useful logic that exists in whatever kind of language is in "" below - computes simple average
+      value_template: "{{ (value_json['k10temp-pci-00c3']['Tctl'].temp1_input + value_json['k10temp-pci-00c3']['Tdie'].temp2_input + value_json['k10temp-pci-00c3']['Tccd1'].temp3_input + value_json['k10temp-pci-00c3']['Tccd2'].temp4_input) / 4 }}"
+    - name: "Intake Temp"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['it8628-isa-0a60']['temp2'].temp2_input }}"
+    - name: "Internal Temp"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['it8628-isa-0a40']['System 1'].temp1_input }}"
+    - name: "Chipset Temp"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['it8628-isa-0a40']['Chipset'].temp2_input }}"
+    - name: "CPU Socket Temp"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['it8628-isa-0a40']['CPU Socket'].temp3_input }}"
+    - name: "CPU Fan"
+      unit_of_measurement: "RPM"
+      value_template: "{{ (value_json['it8628-isa-0a40']['CPU_FAN'].fan1_input + value_json['it8628-isa-0a40']['CPU_OPT'].fan5_input) / 2 }}"
+    - name: "Top Exhaust"
+      unit_of_measurement: "RPM"
+      value_template: "{{ value_json['it8628-isa-0a40']['SYS_FAN1'].fan2_input }}"
+    - name: "Front Intake"
+      unit_of_measurement: "RPM"
+      value_template: "{{ (value_json['it8628-isa-0a40']['SYS_FAN2'].fan3_input + value_json['it8628-isa-0a60']['fan3'].fan3_input) / 2 }}"
+- resource: http://**YOUR IP HERE**:5000/liquidctl
+  scan_interval: 5
+  sensor:
+    - name: "GPU Liquid Temp"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json[1]['status'][0].value }}"
+    - name: "GPU Pump Speed"
+      unit_of_measurement: "RPM"
+      value_template: "{{ value_json[1]['status'][1].value }}"
