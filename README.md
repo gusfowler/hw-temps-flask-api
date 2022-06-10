@@ -19,3 +19,9 @@ that you have a virtualenv set up in this repo, with flask installed in it. chmo
 add "@reboot /root/hw-temps-flask-api/bootstrap >/root/hw-temps-flask-api/flask.log 2>&1" to your root's cron to have it start on boot
 and log to flask.log in this repo. if you stick with port 5000 you do not have to run it as root, you only need root for ports lower than 1024, 
 however these files will need to be modified for that to work.
+
+Cited Sources:
+https://www.home-assistant.io
+https://github.com/lm-sensors/lm-sensors
+https://github.com/liquidctl/liquidctl
+https://flask.palletsprojects.com/en/2.1.x/
